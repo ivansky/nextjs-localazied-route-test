@@ -1,8 +1,17 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
+import { appWithTranslation, useTranslation } from "next-i18next";
+import nextI18NextConfig from "../next-i18next.config";
+import React from "react";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  const [, { language }] = useTranslation();
+  return (
+    <div>
+      <div>Language is {String(language)}</div>
+      <Component {...pageProps} />
+    </div>
+  );
 }
 
-export default MyApp
+export default appWithTranslation(MyApp, nextI18NextConfig);
